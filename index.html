@@ -8,25 +8,32 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <!-- Boxicons for modern icons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Enhanced Background -->
     <div class="background-elements">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="grid-overlay"></div>
     </div>
 
     <nav class="navbar">
-        <a href="#home" class="logo">THY.</a>
+        <a href="#home" class="logo" data-text="THY.">THY.</a>
         <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#education">Education</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#home" class="nav-link">Home</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#education" class="nav-link">Education</a></li>
+            <li><a href="#projects" class="nav-link">Projects</a></li>
+            <li><a href="#skills" class="nav-link">Skills</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
         </ul>
         <div class="menu-icon"><i class='bx bx-menu'></i></div>
     </nav>
@@ -34,71 +41,67 @@
     <main>
         <section id="home" class="hero">
             <div class="hero-content">
-                <h3 class="subtitle">Hello, I'm</h3>
-                <h1 class="title">Tan Hong Yu</h1>
-                <h2 class="profession">Software Engineering Student & Full-Stack Developer</h2>
-                <p class="summary">Focusing on AI-driven analytics and robust system architecture. Seeking an internship to contribute technical expertise and innovative problem-solving.</p>
+                <div class="badge">Welcome to my universe</div>
+                <h1 class="title">I'm <span class="gradient-text">Tan Hong Yu</span></h1>
+                <h2 class="profession"><span class="typing-text"></span><span class="cursor">|</span></h2>
+                <p class="summary">Crafting intelligent systems and immersive web experiences. Let's build the future together.</p>
                 <div class="hero-actions">
-                    <a href="#contact" class="btn primary-btn">Contact Me</a>
-                    <a href="#projects" class="btn secondary-btn">View Work</a>
+                    <a href="#projects" class="btn primary-btn glow-effect">View Projects <i class='bx bx-right-arrow-alt'></i></a>
+                    <a href="#contact" class="btn secondary-btn">Let's Connect</a>
                 </div>
                 <div class="social-links">
-                    <a href="https://www.linkedin.com/in/hong-yu-tan-440ab63b6/" target="_blank" rel="noopener noreferrer"><i class='bx bxl-linkedin'></i></a>
-                    <a href="mailto:tanhongyu0809@gmail.com"><i class='bx bx-envelope'></i></a>
+                    <a href="https://www.linkedin.com/in/hong-yu-tan-440ab63b6/" target="_blank" rel="noopener noreferrer" class="social-icon"><i class='bx bxl-linkedin'></i></a>
+                    <a href="mailto:tanhongyu0809@gmail.com" class="social-icon"><i class='bx bx-envelope'></i></a>
+                    <a href="https://github.com/tanhongyu0809" target="_blank" rel="noopener noreferrer" class="social-icon"><i class='bx bxl-github'></i></a>
                 </div>
             </div>
             <div class="hero-image-container">
-                <div class="image-wrapper">
-                    <img src="profile.jpg" alt="Tan Hong Yu" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?name=Tan+Hong+Yu&size=300&background=1f2937&color=60a5fa&font-size=0.33'">
+                <div class="image-wrapper tilt-element">
+                    <div class="image-border"></div>
+                    <img src="profile.jpg" alt="Tan Hong Yu" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?name=Tan+Hong+Yu&size=400&background=0a0a0a&color=00f0ff&font-size=0.33'">
                 </div>
             </div>
         </section>
 
         <section id="about" class="about">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <h2>About Me</h2>
-                <div class="underline"></div>
+                <div class="neon-line"></div>
             </div>
-            <div class="about-content glass-card">
-                <p>I am a Software Engineering student at TAR UMT with a strong passion for developing AI-driven analytics and engineering robust system architectures.</p>
-                <p>My proficiency spans Python, Java, HTML, and full-stack development, reinforced by practical experience in building multi-modal emotion recognition engines and integrated medical management systems.</p>
-                <div class="availability">
-                    <i class='bx bx-calendar-check'></i> 
-                    <span><strong>Seeking Year 3 Internship:</strong> Available 02 November 2026 - 18 April 2027</span>
+            <div class="about-content glass-card reveal tilt-element">
+                <div class="about-text">
+                    <p>I am a Software Engineering student at <strong>TAR UMT</strong> with a profound passion for AI-driven analytics and robust system architectures.</p>
+                    <p>Bridging the gap between intelligent algorithms and user-centric design, I specialize in transforming complex data into seamless, impactful digital experiences.</p>
+                </div>
+                <div class="availability pulse-glow">
+                    <i class='bx bx-radar'></i> 
+                    <span><strong>Actively Seeking Year 3 Internship</strong> <br> (02 Nov 2026 - 18 Apr 2027)</span>
                 </div>
                 <div class="personal-info">
-                    <div class="info-item">
-                        <i class='bx bx-map'></i>
-                        <span>Ampang, Selangor</span>
-                    </div>
-                    <div class="info-item">
-                        <i class='bx bx-phone'></i>
-                        <span>+60186675399</span>
-                    </div>
-                    <div class="info-item">
-                        <i class='bx bx-globe'></i>
-                        <span>English, Mandarin, Malay</span>
-                    </div>
+                    <div class="info-badge"><i class='bx bx-map'></i> Ampang, Selangor</div>
+                    <div class="info-badge"><i class='bx bx-phone'></i> +60186675399</div>
+                    <div class="info-badge"><i class='bx bx-globe'></i> EN / ZH / MS</div>
                 </div>
             </div>
         </section>
 
         <section id="education" class="education">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <h2>Education</h2>
-                <div class="underline"></div>
+                <div class="neon-line"></div>
             </div>
             <div class="timeline">
-                <div class="timeline-item glass-card">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
+                <div class="timeline-item reveal tilt-element">
+                    <div class="timeline-dot pulse-glow"></div>
+                    <div class="timeline-content glass-card">
+                        <div class="year-badge">2026 – Present</div>
                         <h3>Bachelor of Software Engineering (Honours)</h3>
                         <h4>TAR UMT, Malaysia</h4>
-                        <span class="date">2026 – Present</span>
-                        <p class="cgpa"><strong>CGPA:</strong> 3.59 / 4.0</p>
-                        <p><strong>Relevant Coursework:</strong> Problem Solving, Object-Oriented Programming, Database Applications, Software Development, Mobile App Development, Systems Analysis, Operating Systems, Data Structures, Computer Networks, Interface Design, Artificial Intelligence, Software Testing.</p>
+                        <div class="cgpa-box">CGPA: <span>3.59 / 4.0</span></div>
+                        <p class="coursework"><strong>Core:</strong> AI, Data Structures, OOP, Mobile & Web Dev, System Analysis.</p>
                         <div class="awards">
-                            <i class='bx bx-award'></i> Dean's List x2, Soft Skills Competency Certificate Gold Award
+                            <span class="award-tag"><i class='bx bx-trophy'></i> Dean's List x2</span>
+                            <span class="award-tag"><i class='bx bx-medal'></i> Soft Skills Gold Award</span>
                         </div>
                     </div>
                 </div>
@@ -106,45 +109,36 @@
         </section>
 
         <section id="projects" class="projects">
-            <div class="section-header">
-                <h2>Project Experience</h2>
-                <div class="underline"></div>
+            <div class="section-header reveal">
+                <h2>Featured Projects</h2>
+                <div class="neon-line"></div>
             </div>
             <div class="projects-grid">
-                <div class="project-card glass-card">
-                    <h3>Web-Based Multi-modal Emotion Recognition System</h3>
+                <div class="project-card glass-card reveal tilt-element" style="--delay: 0.1s">
+                    <div class="project-icon"><i class='bx bx-brain'></i></div>
+                    <h3>Multi-modal Emotion Analytics</h3>
                     <h4>TAR UMT Final Year Project</h4>
-                    <ul>
-                        <li>Developed a hybrid CNN-RNN (LSTM) engine leveraging MFCC audio feature extraction to classify vocal emotions with high accuracy in real time.</li>
-                        <li>Integrated into a web-based client-server interface for longitudinal emotion analytics.</li>
-                        <li>Followed an Agile methodology to iteratively refine deep learning modules and ensure a rigorous testing lifecycle.</li>
-                    </ul>
+                    <p>Hybrid CNN-RNN (LSTM) engine for real-time vocal emotion classification via MFCC audio feature extraction.</p>
                     <div class="tech-stack">
-                        <span>Python</span><span>Deep Learning</span><span>Web</span>
+                        <span>Python</span><span>Deep Learning</span><span>Web Interface</span>
                     </div>
                 </div>
 
-                <div class="project-card glass-card">
-                    <h3>Clinic Ng and Singh Management System</h3>
-                    <h4>Academic Assignment (BMCS2063)</h4>
-                    <ul>
-                        <li>Engineered a comprehensive Java-based application to automate Pharmacy, Patient, and Doctor maintenance workflows.</li>
-                        <li>Developed the Treatment Management module by integrating records and enabling consultation creation.</li>
-                        <li>Applied Object-Oriented Programming (OOP) principles to build a modular architecture for efficient data retrieval.</li>
-                    </ul>
+                <div class="project-card glass-card reveal tilt-element" style="--delay: 0.2s">
+                    <div class="project-icon"><i class='bx bx-plus-medical'></i></div>
+                    <h3>Clinic Management System</h3>
+                    <h4>Java OOP Architecture</h4>
+                    <p>Comprehensive ecosystem automating Pharmacy, Patient, and Doctor workflows with robust data retrieval.</p>
                     <div class="tech-stack">
                         <span>Java</span><span>OOP</span><span>Data Structures</span>
                     </div>
                 </div>
 
-                <div class="project-card glass-card">
-                    <h3>AI-Powered ASL Recognition System</h3>
-                    <h4>Academic Assignment (BMCS2203)</h4>
-                    <ul>
-                        <li>Built a real-time ASL recognition tool using MediaPipe to process 3D hand landmarks into a normalized 65-element vector.</li>
-                        <li>Evaluated Random Forest, SVM, and MLP models, selecting Random Forest for superior real-time performance.</li>
-                        <li>Designed a functional GUI with live video overlays and used Data Augmentation to ensure robustness.</li>
-                    </ul>
+                <div class="project-card glass-card reveal tilt-element" style="--delay: 0.3s">
+                    <div class="project-icon"><i class='bx bx-hand'></i></div>
+                    <h3>AI ASL Recognition</h3>
+                    <h4>Real-time Computer Vision</h4>
+                    <p>MediaPipe-powered 3D hand landmark processing with Random Forest classification for American Sign Language.</p>
                     <div class="tech-stack">
                         <span>Python</span><span>MediaPipe</span><span>Machine Learning</span>
                     </div>
@@ -153,58 +147,57 @@
         </section>
 
         <section id="skills" class="skills">
-            <div class="section-header">
-                <h2>Technical Skills</h2>
-                <div class="underline"></div>
+            <div class="section-header reveal">
+                <h2>Tech Arsenal</h2>
+                <div class="neon-line"></div>
             </div>
             <div class="skills-container">
-                <div class="skill-category glass-card">
-                    <h3><i class='bx bx-code-alt'></i> Languages & Web</h3>
+                <div class="skill-category glass-card reveal tilt-element" style="--delay: 0.1s">
+                    <div class="category-icon"><i class='bx bx-code-curly'></i></div>
+                    <h3>Development</h3>
                     <div class="skill-tags">
                         <span>Python</span><span>Java</span><span>C++</span>
-                        <span>HTML</span><span>CSS</span><span>JavaScript</span><span>PHP</span>
+                        <span>HTML/CSS</span><span>JavaScript</span><span>PHP</span>
                     </div>
                 </div>
-                <div class="skill-category glass-card">
-                    <h3><i class='bx bx-server'></i> Database & Core</h3>
+                <div class="skill-category glass-card reveal tilt-element" style="--delay: 0.2s">
+                    <div class="category-icon"><i class='bx bx-data'></i></div>
+                    <h3>Data & Systems</h3>
                     <div class="skill-tags">
-                        <span>Oracle SQL Plus</span>
-                        <span>Software Testing</span><span>AI Signal Analysis</span><span>Database Management</span>
+                        <span>Oracle SQL Plus</span><span>Machine Learning</span>
+                        <span>Signal Analysis</span><span>Software Testing</span>
                     </div>
                 </div>
-                <div class="skill-category glass-card">
-                    <h3><i class='bx bx-wrench'></i> Frameworks & Tools</h3>
+                <div class="skill-category glass-card reveal tilt-element" style="--delay: 0.3s">
+                    <div class="category-icon"><i class='bx bx-wrench'></i></div>
+                    <h3>Tools</h3>
                     <div class="skill-tags">
-                        <span>MediaPipe</span><span>Jupyter</span><span>GitHub</span>
-                        <span>VS Code</span><span>Linux</span><span>XAMPP</span><span>Packet Tracer</span>
+                        <span>MediaPipe</span><span>Git/GitHub</span><span>Jupyter</span>
+                        <span>VS Code</span><span>Linux</span><span>Cisco Packet Tracer</span>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="contact" class="contact">
-            <div class="section-header">
-                <h2>Get In Touch</h2>
-                <div class="underline"></div>
+            <div class="section-header reveal">
+                <h2>Let's Talk</h2>
+                <div class="neon-line"></div>
             </div>
-            <div class="contact-container glass-card">
-                <div class="contact-info">
-                    <p>I'm currently seeking a Year 3 internship starting November 2026. Whether you have a position available or just want to connect, my inbox is always open!</p>
-                    <a href="mailto:tanhongyu0809@gmail.com" class="btn primary-btn contact-btn">
-                        <i class='bx bx-envelope'></i> Say Hello
+            <div class="contact-container glass-card reveal tilt-element">
+                <div class="contact-content">
+                    <i class='bx bx-planet mega-icon'></i>
+                    <p>Ready to bring innovative solutions to your team. My inbox is open for internships, opportunities, or just a chat.</p>
+                    <a href="mailto:tanhongyu0809@gmail.com" class="btn primary-btn glow-effect mega-btn">
+                        Say Hello <i class='bx bx-send'></i>
                     </a>
-                    <div class="contact-links">
-                        <a href="https://www.linkedin.com/in/hong-yu-tan-440ab63b6/" target="_blank" rel="noopener noreferrer">
-                            <i class='bx bxl-linkedin-square'></i> LinkedIn Profile
-                        </a>
-                    </div>
                 </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 Tan Hong Yu. All rights reserved.</p>
+        <p>&copy; 2026 Tan Hong Yu. Designed for impact.</p>
     </footer>
 
     <script src="script.js"></script>
