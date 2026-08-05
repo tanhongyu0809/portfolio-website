@@ -381,7 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Ignore errors caused by clearing the src or empty src
             if (!this.getAttribute('src')) return;
             
-            alert(`图片加载失败！请确保 Google Drive 的图片权限已设置为 '任何人可见'。`);
+            alert(`图片加载失败！请确保你在 Image/ 文件夹里有一个对应的图片。`);
             if (modal) modal.classList.remove('show');
         });
     }
