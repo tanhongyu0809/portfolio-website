@@ -369,13 +369,59 @@ document.addEventListener('DOMContentLoaded', () => {
     generateStars("stars2", 200, "#FFF");
     generateStars("stars3", 100, "#FFF");
 
-    // --- Certificate Google Drive Link Logic ---
+    // --- Certificate Image Modal Logic ---
+    const modal = document.getElementById('cert-modal');
+    const modalImg = document.getElementById('cert-modal-img');
+    const closeBtn = document.querySelector('.modal-close');
     const certLinks = document.querySelectorAll('.clickable-card');
-    
-    certLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            window.open('https://drive.google.com/drive/folders/1mMuDYjfPIOMeUSDfy7lRUsCppoOxNrrr', '_blank');
+
+    // Add error handler for broken images
+    if (modalImg) {
+        modalImg.addEventListener('error', function() {
+            // Ignore errors caused by clearing the src or empty src
+            if (!this.getAttribute('src')) return;
+            
+            alert(`图片加载失败！请确保 Google Drive 的图片权限已设置为 '任何人可见'。`);
+            if (modal) modal.classList.remove('show');
         });
+    }
+
+    // Open modal on link click
+    certLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const imageSrc = this.getAttribute('data-image');
+            
+            // If the link has an image assigned, intercept the click and open modal
+            if (imageSrc && modal && modalImg) {
+                e.preventDefault(); // Stop from opening new tab immediately
+                modalImg.src = imageSrc;
+                modal.classList.add('show');
+            }
+        });
+    });
+
+    // Close modal on close button click
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('show');
+            setTimeout(() => modalImg.removeAttribute('src'), 300);
+        });
+    }
+
+    // Close modal when clicking outside the image
+    window.addEventListener('click', (e) => {
+        if (modal && e.target === modal) {
+            modal.classList.remove('show');
+            setTimeout(() => modalImg.removeAttribute('src'), 300);
+        }
+    });
+
+    // Close modal on ESC key
+    window.addEventListener('keydown', (e) => {
+        if (modal && e.key === 'Escape' && modal.classList.contains('show')) {
+            modal.classList.remove('show');
+            setTimeout(() => modalImg.removeAttribute('src'), 300);
+        }
     });
 
 });
