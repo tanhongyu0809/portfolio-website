@@ -8,21 +8,34 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=Inter:wght@300;400;500;600&family=VT323&display=swap" rel="stylesheet">
     <!-- Boxicons for modern icons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
+    <!-- Full Site Starfield Background -->
+    <div id="starfield">
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
+    </div>
+
     <!-- Custom Cursor -->
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
 
-    <!-- Enhanced Background -->
+    <!-- SVG Filters for Ripple Effect -->
+    <svg width="0" height="0" style="position: absolute; z-index: -1;">
+        <filter id="water-ripple">
+            <feTurbulence id="turbulence" type="fractalNoise" baseFrequency="0.01 0.05" numOctaves="1" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+    </svg>
+
+    <!-- Pixel Art Background (Layered for animation) -->
     <div class="background-elements">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-        <div class="grid-overlay"></div>
+        <div class="bg-base"></div>
+        <div class="bg-ripple"></div>
     </div>
 
     <nav class="navbar">
@@ -47,20 +60,15 @@
                 <p class="summary">Crafting intelligent systems and immersive web experiences. Let's build the future together.</p>
                 <div class="hero-actions">
                     <a href="#projects" class="btn primary-btn glow-effect">View Projects <i class='bx bx-right-arrow-alt'></i></a>
-                    <a href="#contact" class="btn secondary-btn">Let's Connect</a>
+                    <a href="https://www.linkedin.com/in/hong-yu-tan-440ab63b6/" target="_blank" rel="noopener noreferrer" class="btn secondary-btn">Let's Connect</a>
                 </div>
                 <div class="social-links">
                     <a href="https://www.linkedin.com/in/hong-yu-tan-440ab63b6/" target="_blank" rel="noopener noreferrer" class="social-icon"><i class='bx bxl-linkedin'></i></a>
-                    <a href="mailto:tanhongyu0809@gmail.com" class="social-icon"><i class='bx bx-envelope'></i></a>
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=tanhongyu0809@gmail.com" target="_blank" class="social-icon"><i class='bx bx-envelope'></i></a>
                     <a href="https://github.com/tanhongyu0809" target="_blank" rel="noopener noreferrer" class="social-icon"><i class='bx bxl-github'></i></a>
                 </div>
             </div>
-            <div class="hero-image-container">
-                <div class="image-wrapper tilt-element">
-                    <div class="image-border"></div>
-                    <img src="profile.jpg" alt="Tan Hong Yu" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?name=Tan+Hong+Yu&size=400&background=0a0a0a&color=00f0ff&font-size=0.33'">
-                </div>
-            </div>
+
         </section>
 
         <section id="about" class="about">
@@ -68,19 +76,38 @@
                 <h2>About Me</h2>
                 <div class="neon-line"></div>
             </div>
-            <div class="about-content glass-card reveal tilt-element">
-                <div class="about-text">
-                    <p>I am a Software Engineering student at <strong>TAR UMT</strong> with a profound passion for AI-driven analytics and robust system architectures.</p>
-                    <p>Bridging the gap between intelligent algorithms and user-centric design, I specialize in transforming complex data into seamless, impactful digital experiences.</p>
+            
+            <div class="bento-grid reveal tilt-element">
+                <!-- Main Intro Box (Spans 2 columns on desktop) -->
+                <div class="bento-item bento-main glass-card scanline-fx">
+                    <i class='bx bx-terminal bento-icon'></i>
+                    <h3>> System_Overview</h3>
+                    <div class="about-text">
+                        <p>I am a Software Engineering student at <span class="highlight">TAR UMT</span> with a profound passion for AI-driven analytics and robust system architectures.</p>
+                        <p>Bridging the gap between intelligent algorithms and user-centric design, I specialize in transforming complex data into seamless, impactful digital experiences.</p>
+                    </div>
                 </div>
-                <div class="availability pulse-glow">
-                    <i class='bx bx-radar'></i> 
-                    <span><strong>Actively Seeking Year 3 Internship</strong> <br> (02 Nov 2026 - 18 Apr 2027)</span>
+
+                <!-- Status/Availability Box -->
+                <div class="bento-item bento-status glass-card scanline-fx pulse-glow">
+                    <i class='bx bx-radar bento-icon accent'></i> 
+                    <div class="status-text">
+                        <span class="label">STATUS:</span>
+                        <span class="value">Actively Seeking Year 3 Internship</span>
+                        <span class="sub-value">(02 Nov 2026 - 18 Apr 2027)</span>
+                    </div>
                 </div>
-                <div class="personal-info">
-                    <div class="info-badge"><i class='bx bx-map'></i> Ampang, Selangor</div>
-                    <div class="info-badge"><i class='bx bx-phone'></i> +60186675399</div>
-                    <div class="info-badge"><i class='bx bx-globe'></i> EN / ZH / MS</div>
+
+                <!-- Personal Info Box -->
+                <div class="bento-item bento-info glass-card scanline-fx">
+                    <i class='bx bx-data bento-icon'></i>
+                    <h3>> Node_Data</h3>
+                    <div class="personal-info">
+                        <div class="info-badge"><i class='bx bx-map'></i> Ampang, Selangor</div>
+                        <div class="info-badge"><i class='bx bx-phone'></i> +60186675399</div>
+                        <div class="info-badge"><i class='bx bx-envelope'></i> tanhongyu0809@gmail.com</div>
+                        <div class="info-badge"><i class='bx bx-globe'></i> English / Chinese / Malay</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -91,56 +118,248 @@
                 <div class="neon-line"></div>
             </div>
             <div class="timeline">
+                <!-- Bachelor's Degree -->
                 <div class="timeline-item reveal tilt-element">
                     <div class="timeline-dot pulse-glow"></div>
-                    <div class="timeline-content glass-card">
-                        <div class="year-badge">2026 – Present</div>
-                        <h3>Bachelor of Software Engineering (Honours)</h3>
-                        <h4>TAR UMT, Malaysia</h4>
+                    <div class="timeline-content glass-card scanline-fx">
+                        <div class="year-badge">Jun 2024 – Jun 2027</div>
+                        <h3>Bachelor of Software Engineering</h3>
+                        <h4>Tunku Abdul Rahman University of Management and Technology</h4>
                         <div class="cgpa-box">CGPA: <span>3.59 / 4.0</span></div>
-                        <p class="coursework"><strong>Core:</strong> AI, Data Structures, OOP, Mobile & Web Dev, System Analysis.</p>
-                        <div class="awards">
-                            <span class="award-tag"><i class='bx bx-trophy'></i> Dean's List x2</span>
-                            <span class="award-tag"><i class='bx bx-medal'></i> Soft Skills Gold Award</span>
+                        <p class="coursework"><strong>Core:</strong> Full-Cycle Software Engineering (SDLC), OOP, Data Structures & Algorithms, AI & Image Processing, Database Management, Networks, QA.</p>
+                        <p class="coursework" style="margin-top: 0.5rem;"><strong>Specialized:</strong> Web-Based Integrated Systems, Advance Database Management.</p>
+                        <div class="awards" style="margin-top: 1rem;">
+                            <span class="award-tag">C++ & Java</span>
+                            <span class="award-tag">Python</span>
+                            <span class="award-tag">Flutter</span>
+                            <span class="award-tag">UX Design</span>
+                            <span class="award-tag">Software Testing</span>
+                            <span class="award-tag">Image Processing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Foundation -->
+                <div class="timeline-item reveal tilt-element">
+                    <div class="timeline-dot pulse-glow"></div>
+                    <div class="timeline-content glass-card scanline-fx">
+                        <div class="year-badge">Jun 2023 – Jun 2024</div>
+                        <h3>Foundation in Computing</h3>
+                        <h4>Tunku Abdul Rahman University of Management and Technology</h4>
+                        <div class="cgpa-box">CGPA: <span>3.22 / 4.0</span></div>
+                        <p class="coursework"><strong>Core Concepts:</strong> Computer Networks, IT Essentials, Data Management, Web Development, Emerging Trends in IT.</p>
+                        <div class="awards" style="margin-top: 1rem;">
+                            <span class="award-tag">Python & C++</span>
+                            <span class="award-tag">HTML/CSS/PHP</span>
+                            <span class="award-tag">Machine Learning</span>
+                            <span class="award-tag">PyTorch</span>
+                            <span class="award-tag">DBMS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- High School -->
+                <div class="timeline-item reveal tilt-element">
+                    <div class="timeline-dot pulse-glow"></div>
+                    <div class="timeline-content glass-card scanline-fx">
+                        <div class="year-badge">Secondary Education</div>
+                        <h3>Sekolah Menengah Stella Maris Pudu</h3>
+                        <h4>Kuala Lumpur, Malaysia</h4>
+                        <p class="coursework">Developed a strong foundational interest in technology and analytical problem-solving. Actively engaged in extracurricular activities, fostering teamwork, leadership, and resilient soft skills which paved the way for a transition into software engineering.</p>
+                        <div class="awards" style="margin-top: 1rem;">
+                            <span class="award-tag">Analytical Thinking</span>
+                            <span class="award-tag">Team Leadership</span>
+                            <span class="award-tag">STEM Foundation</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="projects" class="projects">
+        <!-- CERTIFICATIONS SECTION -->
+        <section id="certifications" class="certifications">
             <div class="section-header reveal">
-                <h2>Featured Projects</h2>
+                <h2>Licenses & Certifications</h2>
                 <div class="neon-line"></div>
             </div>
-            <div class="projects-grid">
-                <div class="project-card glass-card reveal tilt-element" style="--delay: 0.1s">
-                    <div class="project-icon"><i class='bx bx-brain'></i></div>
-                    <h3>Multi-modal Emotion Analytics</h3>
-                    <h4>TAR UMT Final Year Project</h4>
-                    <p>Hybrid CNN-RNN (LSTM) engine for real-time vocal emotion classification via MFCC audio feature extraction.</p>
-                    <div class="tech-stack">
-                        <span>Python</span><span>Deep Learning</span><span>Web Interface</span>
-                    </div>
+            
+            <div class="cert-grid reveal tilt-element">
+                <!-- Microsoft -->
+                <div class="cert-card glass-card scanline-fx clickable-card" data-image="Image/microsoft_applied_skills.jpg">
+                    <i class='bx bxl-microsoft cert-icon'></i>
+                    <h3>Applied Skills: AI Agents</h3>
+                    <h4>Microsoft</h4>
+                    <span class="cert-date">Issued Aug 2026</span>
+                    <div class="awards"><span class="award-tag">Artificial Intelligence</span></div>
+                </div>
+                
+                <div class="cert-card glass-card scanline-fx clickable-card" data-image="Image/career_essentials_gen_ai.jpg">
+                    <i class='bx bxl-linkedin-square cert-icon'></i>
+                    <h3>Gen AI Essentials</h3>
+                    <h4>Microsoft & LinkedIn</h4>
+                    <span class="cert-date">Issued Aug 2026</span>
+                    <div class="awards"><span class="award-tag">Prompt Engineering</span><span class="award-tag">AI for Business</span></div>
                 </div>
 
-                <div class="project-card glass-card reveal tilt-element" style="--delay: 0.2s">
-                    <div class="project-icon"><i class='bx bx-plus-medical'></i></div>
-                    <h3>Clinic Management System</h3>
-                    <h4>Java OOP Architecture</h4>
-                    <p>Comprehensive ecosystem automating Pharmacy, Patient, and Doctor workflows with robust data retrieval.</p>
-                    <div class="tech-stack">
-                        <span>Java</span><span>OOP</span><span>Data Structures</span>
-                    </div>
+                <div class="cert-card glass-card scanline-fx clickable-card" data-image="Image/what_is_generative_ai.jpg">
+                    <i class='bx bxl-linkedin-square cert-icon'></i>
+                    <h3>What Is Generative AI?</h3>
+                    <h4>LinkedIn</h4>
+                    <span class="cert-date">Issued Aug 2026</span>
+                    <div class="awards"><span class="award-tag">Artificial Intelligence</span></div>
                 </div>
 
-                <div class="project-card glass-card reveal tilt-element" style="--delay: 0.3s">
-                    <div class="project-icon"><i class='bx bx-hand'></i></div>
-                    <h3>AI ASL Recognition</h3>
-                    <h4>Real-time Computer Vision</h4>
-                    <p>MediaPipe-powered 3D hand landmark processing with Random Forest classification for American Sign Language.</p>
-                    <div class="tech-stack">
-                        <span>Python</span><span>MediaPipe</span><span>Machine Learning</span>
+                <!-- Google & Alibaba -->
+                <div class="cert-card glass-card scanline-fx clickable-card" data-image="Image/gemini_educator.jpg">
+                    <i class='bx bxl-google cert-icon'></i>
+                    <h3>Gemini Certified Educator</h3>
+                    <h4>Google for Education</h4>
+                    <span class="cert-date">Issued Aug 2026</span>
+                    <div class="awards"><span class="award-tag">Generative AI</span></div>
+                </div>
+
+                <div class="cert-card glass-card scanline-fx clickable-card" data-image="Image/apsara_clouder.jpg">
+                    <i class='bx bx-cloud cert-icon'></i>
+                    <h3>Apsara Clouder Gen AI</h3>
+                    <h4>Alibaba Cloud</h4>
+                    <span class="cert-date">Issued Aug 2026</span>
+                    <div class="awards"><span class="award-tag">Cloud AI</span></div>
+                </div>
+
+                <!-- Anthropic -->
+                <div class="cert-card glass-card scanline-fx clickable-card" data-image="Image/claude_101.jpg">
+                    <i class='bx bx-bot cert-icon'></i>
+                    <h3>Claude 101</h3>
+                    <h4>Anthropic</h4>
+                    <span class="cert-date">Issued Jun 2026</span>
+                    <div class="awards"><span class="award-tag">LLMs</span><span class="award-tag">Prompting</span></div>
+                </div>
+
+                <div class="cert-card glass-card scanline-fx clickable-card" data-image="Image/claude_code_101.jpg">
+                    <i class='bx bx-code-block cert-icon'></i>
+                    <h3>Claude Code 101</h3>
+                    <h4>Anthropic</h4>
+                    <span class="cert-date">Issued Jun 2026</span>
+                    <div class="awards"><span class="award-tag">Coding Assistants</span></div>
+                </div>
+
+                <!-- Cisco -->
+                <div class="cert-card glass-card scanline-fx clickable-card" data-image="Image/cisco_ccna.jpg">
+                    <i class='bx bx-network-chart cert-icon'></i>
+                    <h3>CCNA: Intro to Networks</h3>
+                    <h4>Cisco Networking Academy</h4>
+                    <span class="cert-date">Issued Nov 2025</span>
+                    <div class="awards"><span class="award-tag">Networking</span></div>
+                </div>
+
+                <div class="cert-card glass-card scanline-fx clickable-card" data-image="Image/cisco_data_science.jpg">
+                    <i class='bx bx-data cert-icon'></i>
+                    <h3>Intro to Data Science</h3>
+                    <h4>Cisco Networking Academy</h4>
+                    <span class="cert-date">Issued Mar 2026</span>
+                    <div class="awards"><span class="award-tag">Data Science</span></div>
+                </div>
+
+                <!-- HackerRank -->
+                <div class="cert-card glass-card scanline-fx clickable-card" data-image="Image/hackerrank_python.jpg">
+                    <i class='bx bxl-python cert-icon'></i>
+                    <h3>Python (Basic)</h3>
+                    <h4>HackerRank</h4>
+                    <span class="cert-date">Issued Jun 2026</span>
+                    <div class="awards"><span class="award-tag">Python</span></div>
+                </div>
+
+                <div class="cert-card glass-card scanline-fx clickable-card" data-image="Image/hackerrank_java.jpg">
+                    <i class='bx bxl-java cert-icon'></i>
+                    <h3>Java (Basic)</h3>
+                    <h4>HackerRank</h4>
+                    <span class="cert-date">Issued Jun 2026</span>
+                    <div class="awards"><span class="award-tag">Java</span></div>
+                </div>
+
+                <!-- Ministry of Digital Malaysia -->
+                <div class="cert-card glass-card scanline-fx clickable-card" data-image="Image/rakyat_gen_ai.jpg">
+                    <i class='bx bx-check-shield cert-icon'></i>
+                    <h3>Intro to Generative AI</h3>
+                    <h4>Rakyat Digital (Ministry)</h4>
+                    <span class="cert-date">Issued Jun 2026</span>
+                    <div class="awards"><span class="award-tag">AI Ethics</span></div>
+                </div>
+
+                <div class="cert-card glass-card scanline-fx clickable-card" data-image="Image/rakyat_fluency.jpg">
+                    <i class='bx bx-check-shield cert-icon'></i>
+                    <h3>AI Fluency</h3>
+                    <h4>Rakyat Digital (Ministry)</h4>
+                    <span class="cert-date">Issued Jun 2026</span>
+                    <div class="awards"><span class="award-tag">LLM Interaction</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="projects split-section">
+            <div class="split-left reveal">
+                <h2>Featured Projects</h2>
+                <div class="neon-line" style="margin-left: 0;"></div>
+                
+                <div id="dynamic-desc" class="dynamic-desc">
+                    <!-- This content will be updated by JS -->
+                    <div class="project-icon" id="desc-icon"><i class='bx bx-brain'></i></div>
+                    <h3 id="desc-title">Multi-modal Emotion Analytics</h3>
+                    <h4 id="desc-subtitle" class="accent-text">TAR UMT Final Year Project</h4>
+                    <p id="desc-text">Vocal-only emotion recognition SaaS using CNN-BiLSTM for real-time microphone & static audio analysis. WebSocket live audio pipeline, analytics dashboard with auto-generated CSV/Excel/PDF reports, JWT auth, bcrypt hashing, and role-based access control.</p>
+                    <div id="desc-tech" class="tech-stack">
+                        <span>Flask</span><span>PyTorch</span><span>BiLSTM</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="split-right reveal" style="--delay: 0.2s">
+                <div class="carousel-container">
+                    <div class="carousel-3d" id="project-carousel">
+                        <!-- Project 1 -->
+                        <div class="project-card glass-card scanline-fx carousel-item" data-title="Multi-modal Emotion Analytics" data-subtitle="TAR UMT Final Year Project" data-text="Vocal-only emotion recognition SaaS using CNN-BiLSTM for real-time microphone & static audio analysis. WebSocket live audio pipeline, analytics dashboard with auto-generated CSV/Excel/PDF reports, JWT auth, bcrypt hashing, and role-based access control." data-tech="Flask,PyTorch,BiLSTM" data-icon="bx-brain">
+                            <div class="project-icon"><i class='bx bx-brain'></i></div>
+                            <h3 class="short-title">Emotion Analytics</h3>
+                        </div>
+
+                        <!-- Project 2 -->
+                        <div class="project-card glass-card scanline-fx carousel-item" data-title="AI ASL Recognition" data-subtitle="Real-time Computer Vision" data-text="Real-time ASL recognition using MediaPipe to convert 3D hand landmarks into a normalized 65-element vector. Evaluated Random Forest, SVM, and MLP algorithms, integrating a Live GUI and data augmentation for maximum robustness." data-tech="Python,MediaPipe,Random Forest" data-icon="bx-scan">
+                            <div class="project-icon"><i class='bx bx-scan'></i></div>
+                            <h3 class="short-title">ASL Recognition</h3>
+                        </div>
+
+                        <!-- Project 3 -->
+                        <div class="project-card glass-card scanline-fx carousel-item" data-title="Thermal Punch Exergame" data-subtitle="Computer Vision Gamification" data-text="Real-time markerless motion tracking exergame using OpenCV. Employs frame differencing and pseudocolour heatmapping for instantaneous exertion feedback." data-tech="Python,OpenCV,HCI" data-icon="bx-target-lock">
+                            <div class="project-icon"><i class='bx bx-target-lock'></i></div>
+                            <h3 class="short-title">Thermal Punch</h3>
+                        </div>
+
+                        <!-- Project 4 -->
+                        <div class="project-card glass-card scanline-fx carousel-item" data-title="Clinic Ng & Singh Ecosystem" data-subtitle="Academic / Java OOP Architecture" data-text="Java-based application automating Patient, Doctor, Consultation, Treatment, and Pharmacy workflows. Designed a modular Consultation Management system linking records, built heavily on OOP principles for scalable architecture." data-tech="Java,OOP" data-icon="bx-plus-medical">
+                            <div class="project-icon"><i class='bx bx-plus-medical'></i></div>
+                            <h3 class="short-title">Clinic System</h3>
+                        </div>
+
+                        <!-- Project 5 -->
+                        <div class="project-card glass-card scanline-fx carousel-item" data-title="4EVABEAUTY Booking Engine" data-subtitle="Academic / C++ Application" data-text="C++ console application managing beauty service bookings. Engineered core modules for secure payment processing, dynamic display of available slots, complex booking logic, and automated generation of comprehensive sales reports." data-tech="C++,Algorithms" data-icon="bx-calendar-star">
+                            <div class="project-icon"><i class='bx bx-calendar-star'></i></div>
+                            <h3 class="short-title">4EVABEAUTY</h3>
+                        </div>
+
+                        <!-- Project 6 -->
+                        <div class="project-card glass-card scanline-fx carousel-item" data-title="J.P. Morgan Investment Simulator" data-subtitle="Academic / x86 Assembly" data-text="x86 Assembly program for investment management. Handled low-level financial computations including Simple and Compound Interest calculators, alongside secure account balance top-ups and bank details modification." data-tech="x86 Assembly,FPU Math" data-icon="bx-trending-up">
+                            <div class="project-icon"><i class='bx bx-trending-up'></i></div>
+                            <h3 class="short-title">Investment System</h3>
+                        </div>
+
+                        <!-- Project 7 -->
+                        <div class="project-card glass-card scanline-fx carousel-item" data-title="Transit Terminal Database" data-subtitle="Academic / Oracle PL/SQL" data-text="Oracle PL/SQL database architecture for terminal operations. Authored advanced queries, procedures, and triggers to automate ticket extensions and bus maintenance scheduling, while generating dynamic management reports using cursors." data-tech="Oracle PL/SQL,Database Design" data-icon="bx-bus">
+                            <div class="project-icon"><i class='bx bx-bus'></i></div>
+                            <h3 class="short-title">Terminal DB</h3>
+                        </div>
+                    </div>
+                    <div class="carousel-instructions pulse-glow">
+                        <i class='bx bx-move-horizontal'></i> Drag or Swipe to Rotate
                     </div>
                 </div>
             </div>
@@ -154,26 +373,34 @@
             <div class="skills-container">
                 <div class="skill-category glass-card reveal tilt-element" style="--delay: 0.1s">
                     <div class="category-icon"><i class='bx bx-code-curly'></i></div>
-                    <h3>Development</h3>
+                    <h3>Programming Languages</h3>
                     <div class="skill-tags">
                         <span>Python</span><span>Java</span><span>C++</span>
-                        <span>HTML/CSS</span><span>JavaScript</span><span>PHP</span>
                     </div>
                 </div>
                 <div class="skill-category glass-card reveal tilt-element" style="--delay: 0.2s">
-                    <div class="category-icon"><i class='bx bx-data'></i></div>
-                    <h3>Data & Systems</h3>
+                    <div class="category-icon"><i class='bx bx-window-alt'></i></div>
+                    <h3>Web Development</h3>
                     <div class="skill-tags">
-                        <span>Oracle SQL Plus</span><span>Machine Learning</span>
-                        <span>Signal Analysis</span><span>Software Testing</span>
+                        <span>HTML</span><span>CSS</span><span>JavaScript</span><span>PHP</span>
                     </div>
                 </div>
                 <div class="skill-category glass-card reveal tilt-element" style="--delay: 0.3s">
-                    <div class="category-icon"><i class='bx bx-wrench'></i></div>
-                    <h3>Tools</h3>
+                    <div class="category-icon"><i class='bx bx-data'></i></div>
+                    <h3>Database</h3>
                     <div class="skill-tags">
-                        <span>MediaPipe</span><span>Git/GitHub</span><span>Jupyter</span>
-                        <span>VS Code</span><span>Linux</span><span>Cisco Packet Tracer</span>
+                        <span>Oracle SQL Plus</span><span>Supabase</span>
+                    </div>
+                </div>
+                <div class="skill-category glass-card reveal tilt-element" style="--delay: 0.4s">
+                    <div class="category-icon"><i class='bx bx-wrench'></i></div>
+                    <h3>Frameworks & Tools</h3>
+                    <div class="skill-tags">
+                        <span>MediaPipe</span><span>Jupyter Notebook</span>
+                        <span>GitHub</span><span>VS Code</span><span>Linux</span>
+                        <span>Apache Netbeans 25</span><span>XAMPP</span><span>Cisco Packet Tracer</span>
+                        <span>ChatGPT</span><span>Gemini</span><span>Claude</span>
+                        <span>Antigravity</span><span>Cursor</span>
                     </div>
                 </div>
             </div>
@@ -188,13 +415,21 @@
                 <div class="contact-content">
                     <i class='bx bx-planet mega-icon'></i>
                     <p>Ready to bring innovative solutions to your team. My inbox is open for internships, opportunities, or just a chat.</p>
-                    <a href="mailto:tanhongyu0809@gmail.com" class="btn primary-btn glow-effect mega-btn">
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=tanhongyu0809@gmail.com" target="_blank" class="btn primary-btn glow-effect mega-btn">
                         Say Hello <i class='bx bx-send'></i>
                     </a>
                 </div>
             </div>
         </section>
     </main>
+
+    <!-- CERTIFICATE IMAGE MODAL -->
+    <div id="cert-modal" class="modal">
+        <span class="modal-close">&times;</span>
+        <div class="modal-content glass-card">
+            <img id="cert-modal-img" src="" alt="Certificate">
+        </div>
+    </div>
 
     <footer>
         <p>&copy; 2026 Tan Hong Yu. Designed for impact.</p>
