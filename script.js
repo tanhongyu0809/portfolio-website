@@ -1,30 +1,105 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- 1. Custom Cursor ---
+    // --- 0. Retro Boot-up Preloader ---
+    const preloader = document.getElementById('preloader');
+    const bootTextElement = document.getElementById('boot-text');
+    const bootMessages = [
+        "INITIALIZING SYSTEM...",
+        "LOADING NEURAL NETWORKS...",
+        "ESTABLISHING SECURE CONNECTION...",
+        "ACCESS GRANTED."
+    ];
+
+    let messageIndex = 0;
+    
+    function typeBootMessage() {
+        if (messageIndex < bootMessages.length) {
+            bootTextElement.innerText = bootMessages[messageIndex];
+            messageIndex++;
+            setTimeout(typeBootMessage, 400); // 400ms per message
+        } else {
+            // Finished loading messages, fade out preloader
+            setTimeout(() => {
+                preloader.classList.add('hide-preloader');
+                // Optional: remove from DOM after transition
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 800);
+            }, 300);
+        }
+    }
+    
+    // Start typing boot sequence
+    if(preloader && bootTextElement) {
+        setTimeout(typeBootMessage, 300);
+    }
+
+    // --- 1. Advanced Custom Cursor & Magnetic Elements ---
     const cursorDot = document.querySelector('.cursor-dot');
     const cursorOutline = document.querySelector('.cursor-outline');
     
     // Only run custom cursor logic if not on a touch device
     if(window.matchMedia("(pointer: fine)").matches) {
+        
+        let mouseX = 0, mouseY = 0;
+        let outlineX = 0, outlineY = 0;
+        
         window.addEventListener('mousemove', (e) => {
-            const posX = e.clientX;
-            const posY = e.clientY;
+            mouseX = e.clientX;
+            mouseY = e.clientY;
             
-            cursorDot.style.left = `${posX}px`;
-            cursorDot.style.top = `${posY}px`;
-            
-            // Add a slight delay to the outline for a smooth trailing effect
-            cursorOutline.animate({
-                left: `${posX}px`,
-                top: `${posY}px`
-            }, { duration: 500, fill: "forwards" });
+            // Immediate update for the dot
+            cursorDot.style.left = `${mouseX}px`;
+            cursorDot.style.top = `${mouseY}px`;
         });
 
-        // Hover effect on interactable elements
-        const hoverElements = document.querySelectorAll('a, .btn, .social-icon, .menu-icon');
-        hoverElements.forEach(el => {
+        // Spring physics loop for the outline
+        function animateCursor() {
+            let distX = mouseX - outlineX;
+            let distY = mouseY - outlineY;
+            
+            outlineX += distX * 0.15; // easing factor
+            outlineY += distY * 0.15;
+            
+            cursorOutline.style.left = `${outlineX}px`;
+            cursorOutline.style.top = `${outlineY}px`;
+            
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Hover & Magnetic effect on interactable elements
+        const magneticElements = document.querySelectorAll('.btn, .social-icon, .nav-link, .menu-icon');
+        
+        magneticElements.forEach(el => {
             el.addEventListener('mouseenter', () => cursorOutline.classList.add('hover'));
-            el.addEventListener('mouseleave', () => cursorOutline.classList.remove('hover'));
+            el.addEventListener('mouseleave', (e) => {
+                cursorOutline.classList.remove('hover');
+                // Reset magnetic transform
+                el.style.transform = '';
+            });
+            
+            // Magnetic effect logic
+            el.addEventListener('mousemove', (e) => {
+                const rect = el.getBoundingClientRect();
+                const elementCenterX = rect.left + rect.width / 2;
+                const elementCenterY = rect.top + rect.height / 2;
+                
+                // Calculate distance from center
+                const distanceX = e.clientX - elementCenterX;
+                const distanceY = e.clientY - elementCenterY;
+                
+                // Apply a slight pull (adjust 0.3 for strength)
+                const pullStrength = el.classList.contains('nav-link') ? 0.2 : 0.3;
+                el.style.transform = `translate(${distanceX * pullStrength}px, ${distanceY * pullStrength}px)`;
+            });
+        });
+        
+        // General hover for other links (just cursor change, no magnetic)
+        const generalLinks = document.querySelectorAll('a:not(.btn):not(.social-icon):not(.nav-link)');
+        generalLinks.forEach(link => {
+            link.addEventListener('mouseenter', () => cursorOutline.classList.add('hover'));
+            link.addEventListener('mouseleave', () => cursorOutline.classList.remove('hover'));
         });
     }
 
@@ -62,6 +137,25 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Start typing effect after a short delay
     setTimeout(type, 1000);
+
+    // --- 2.5 Random Glitch Effect on Title ---
+    const glitchTitle = document.querySelector('.glitch-effect');
+    if (glitchTitle) {
+        setInterval(() => {
+            glitchTitle.style.animation = 'none';
+            // force reflow
+            void glitchTitle.offsetWidth;
+            glitchTitle.style.animation = null;
+            
+            // Randomly toggle the class for unpredictable glitches
+            if (Math.random() > 0.5) {
+                glitchTitle.classList.remove('glitch-effect');
+                setTimeout(() => {
+                    glitchTitle.classList.add('glitch-effect');
+                }, Math.random() * 500 + 100);
+            }
+        }, 3000);
+    }
 
     // --- 3. Mobile Menu Toggle ---
     const menuIcon = document.querySelector('.menu-icon');

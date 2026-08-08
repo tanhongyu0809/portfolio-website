@@ -50,6 +50,89 @@ body {
     overflow-x: hidden;
 }
 
+/* --- Retro Boot-up Preloader --- */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #02040a;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+}
+
+#preloader.hide-preloader {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.terminal-loader {
+    width: 90%;
+    max-width: 600px;
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid var(--accent-1);
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.terminal-header {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.terminal-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.control {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.control.close { background: #ff5f56; }
+.control.minimize { background: #ffbd2e; }
+.control.maximize { background: #27c93f; }
+
+.terminal-title {
+    margin: 0 auto;
+    font-family: var(--font-pixel);
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+}
+
+.terminal-body {
+    padding: 30px 20px;
+    font-family: var(--font-pixel);
+    font-size: 1.5rem;
+    color: var(--accent-1);
+    min-height: 150px;
+    position: relative;
+    text-shadow: 0 0 5px var(--accent-1);
+}
+
+.terminal-cursor {
+    display: inline-block;
+    width: 10px;
+    animation: blinkCursor 1s step-end infinite;
+}
+
+@keyframes blinkCursor {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
 /* --- Full Site Starfield Background --- */
 #starfield {
     position: fixed;
@@ -1187,17 +1270,64 @@ section {
     color: #cbd5e1;
 }
 
-/* Skills */
-.skills-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+/* Skills - Infinite Marquee */
+.marquee-wrapper {
+    position: relative;
+    width: 100vw;
+    max-width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    overflow: hidden;
+    display: flex;
+    white-space: nowrap;
+    padding: 2rem 0;
 }
 
-@media (min-width: 993px) {
-    .skills-container .skill-category:last-child {
-        grid-column: 1 / -1;
-    }
+/* Gradient masking for smooth fade on edges */
+.marquee-wrapper::before,
+.marquee-wrapper::after {
+    position: absolute;
+    top: 0;
+    width: 10vw;
+    height: 100%;
+    content: "";
+    z-index: 2;
+    pointer-events: none;
+}
+
+.marquee-wrapper::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-base) 0%, transparent 100%);
+}
+
+.marquee-wrapper::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-base) 0%, transparent 100%);
+}
+
+.marquee-content {
+    display: flex;
+    gap: 2rem;
+    padding-left: 2rem;
+    animation: scroll-marquee 25s linear infinite;
+    flex-shrink: 0;
+}
+
+.marquee-wrapper:hover .marquee-content {
+    animation-play-state: paused;
+}
+
+.skill-category {
+    flex: 0 0 auto;
+    width: 350px;
+    white-space: normal; /* Reset text wrapping inside the cards */
+}
+
+@keyframes scroll-marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
 }
 
 .category-icon {
@@ -1448,4 +1578,55 @@ footer {
 
 .modal-close:hover {
     color: var(--accent-2);
+}
+
+/* --- Animation Utilities --- */
+/* Add smooth transition for magnetic effect */
+.btn, .social-icon, .nav-link, .menu-icon {
+    transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.glitch-effect {
+    position: relative;
+}
+
+.glitch-effect::before,
+.glitch-effect::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+
+.glitch-effect::before {
+    left: 2px;
+    text-shadow: -1px 0 red;
+    animation: glitch-anim-1 2s infinite linear alternate-reverse;
+}
+
+.glitch-effect::after {
+    left: -2px;
+    text-shadow: -1px 0 blue;
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim-1 {
+    0% { clip-path: inset(20% 0 80% 0); }
+    20% { clip-path: inset(60% 0 10% 0); }
+    40% { clip-path: inset(40% 0 50% 0); }
+    60% { clip-path: inset(80% 0 5% 0); }
+    80% { clip-path: inset(10% 0 70% 0); }
+    100% { clip-path: inset(30% 0 20% 0); }
+}
+
+@keyframes glitch-anim-2 {
+    0% { clip-path: inset(10% 0 60% 0); }
+    20% { clip-path: inset(30% 0 20% 0); }
+    40% { clip-path: inset(70% 0 10% 0); }
+    60% { clip-path: inset(20% 0 50% 0); }
+    80% { clip-path: inset(50% 0 30% 0); }
+    100% { clip-path: inset(5% 0 80% 0); }
 }
