@@ -40,6 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Only run custom cursor logic if not on a touch device
     if(window.matchMedia("(pointer: fine)").matches) {
+        
+        // Setup parallax elements
+        const stars1 = document.getElementById('stars');
+        const stars2 = document.getElementById('stars2');
+        const stars3 = document.getElementById('stars3');
+
         window.addEventListener('mousemove', (e) => {
             const posX = e.clientX;
             const posY = e.clientY;
@@ -52,6 +58,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 left: `${posX}px`,
                 top: `${posY}px`
             }, { duration: 500, fill: "forwards" });
+
+            // Starfield Parallax Effect
+            const windowCenterX = window.innerWidth / 2;
+            const windowCenterY = window.innerHeight / 2;
+            const moveX = (posX - windowCenterX) * 0.05;
+            const moveY = (posY - windowCenterY) * 0.05;
+
+            if(stars1 && stars2 && stars3) {
+                stars1.style.transform = `translate(${moveX * 0.2}px, ${moveY * 0.2}px)`;
+                stars2.style.transform = `translate(${moveX * 0.4}px, ${moveY * 0.4}px)`;
+                stars3.style.transform = `translate(${moveX * 0.8}px, ${moveY * 0.8}px)`;
+            }
         });
 
         // Hover & Magnetic effect on interactable elements
@@ -156,9 +174,36 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- 5. Scroll Reveal Animation ---
+    // --- 5. Scroll Reveal & Text Decode Animation ---
     const reveals = document.querySelectorAll('.reveal');
+    const decodeChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#%&!$";
     
+    function decodeText(element) {
+        if(element.dataset.decoded === "true") return;
+        element.dataset.decoded = "true";
+        
+        const originalText = element.innerText;
+        let iteration = 0;
+        
+        const interval = setInterval(() => {
+            element.innerText = originalText.split("")
+                .map((letter, index) => {
+                    if(index < iteration) {
+                        return originalText[index];
+                    }
+                    return decodeChars[Math.floor(Math.random() * decodeChars.length)];
+                })
+                .join("");
+            
+            if(iteration >= originalText.length) {
+                clearInterval(interval);
+                element.innerText = originalText;
+            }
+            
+            iteration += 1 / 3; // speed of decoding
+        }, 30);
+    }
+
     function revealOnScroll() {
         const windowHeight = window.innerHeight;
         const revealPoint = 100;
@@ -172,6 +217,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     reveal.style.transitionDelay = delay;
                 }
                 reveal.classList.add('active');
+                
+                // Trigger text decode for headers inside reveal
+                const header = reveal.querySelector('h2');
+                if(header) {
+                    decodeText(header);
+                }
             }
         });
     }
