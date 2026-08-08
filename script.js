@@ -34,39 +34,25 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(typeBootMessage, 300);
     }
 
-    // --- 1. Advanced Custom Cursor & Magnetic Elements ---
+    // --- 1. Custom Cursor & Magnetic Elements ---
     const cursorDot = document.querySelector('.cursor-dot');
     const cursorOutline = document.querySelector('.cursor-outline');
     
     // Only run custom cursor logic if not on a touch device
     if(window.matchMedia("(pointer: fine)").matches) {
-        
-        let mouseX = 0, mouseY = 0;
-        let outlineX = 0, outlineY = 0;
-        
         window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
+            const posX = e.clientX;
+            const posY = e.clientY;
             
-            // Immediate update for the dot
-            cursorDot.style.left = `${mouseX}px`;
-            cursorDot.style.top = `${mouseY}px`;
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+            
+            // Add a slight delay to the outline for a smooth trailing effect
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
         });
-
-        // Spring physics loop for the outline
-        function animateCursor() {
-            let distX = mouseX - outlineX;
-            let distY = mouseY - outlineY;
-            
-            outlineX += distX * 0.15; // easing factor
-            outlineY += distY * 0.15;
-            
-            cursorOutline.style.left = `${outlineX}px`;
-            cursorOutline.style.top = `${outlineY}px`;
-            
-            requestAnimationFrame(animateCursor);
-        }
-        animateCursor();
 
         // Hover & Magnetic effect on interactable elements
         const magneticElements = document.querySelectorAll('.btn, .social-icon, .nav-link, .menu-icon');
@@ -138,24 +124,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Start typing effect after a short delay
     setTimeout(type, 1000);
 
-    // --- 2.5 Random Glitch Effect on Title ---
-    const glitchTitle = document.querySelector('.glitch-effect');
-    if (glitchTitle) {
-        setInterval(() => {
-            glitchTitle.style.animation = 'none';
-            // force reflow
-            void glitchTitle.offsetWidth;
-            glitchTitle.style.animation = null;
-            
-            // Randomly toggle the class for unpredictable glitches
-            if (Math.random() > 0.5) {
-                glitchTitle.classList.remove('glitch-effect');
-                setTimeout(() => {
-                    glitchTitle.classList.add('glitch-effect');
-                }, Math.random() * 500 + 100);
-            }
-        }, 3000);
-    }
 
     // --- 3. Mobile Menu Toggle ---
     const menuIcon = document.querySelector('.menu-icon');
