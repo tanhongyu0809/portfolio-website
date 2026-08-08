@@ -100,9 +100,17 @@ body {
     border-radius: 50%;
 }
 
-.control.close { background: #ff5f56; }
-.control.minimize { background: #ffbd2e; }
-.control.maximize { background: #27c93f; }
+.control.close {
+    background: #ff5f56;
+}
+
+.control.minimize {
+    background: #ffbd2e;
+}
+
+.control.maximize {
+    background: #27c93f;
+}
 
 .terminal-title {
     margin: 0 auto;
@@ -129,8 +137,15 @@ body {
 }
 
 @keyframes blinkCursor {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
 }
 
 /* --- Full Site Starfield Background --- */
@@ -276,7 +291,7 @@ body {
     height: 100%;
     background-image: url('pixel-bg.png');
     background-size: cover;
-    background-position: center bottom;
+    background-position: center 80%; /* Pulled the perspective up slightly from the bottom */
     image-rendering: pixelated;
     /* Keeps pixel art crisp */
 }
@@ -289,6 +304,13 @@ body {
     filter: url('#water-ripple');
     z-index: 1;
     /* Above base layer */
+    transform-origin: center 48%; /* Pivot exactly at the mask fade line to avoid seams */
+    animation: lower-sway 6s ease-in-out infinite alternate;
+}
+
+@keyframes lower-sway {
+    0% { transform: skewX(-0.8deg); }
+    100% { transform: skewX(0.8deg); }
 }
 
 /* Wind Particles Animation */
@@ -1563,8 +1585,9 @@ footer {
 
 /* --- Animation Utilities --- */
 /* Add smooth transition for magnetic effect */
-.btn, .social-icon, .nav-link, .menu-icon {
+.btn,
+.social-icon,
+.nav-link,
+.menu-icon {
     transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s, color 0.3s, box-shadow 0.3s;
 }
-
-
