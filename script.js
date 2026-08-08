@@ -87,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
             link.addEventListener('mouseenter', () => cursorOutline.classList.add('hover'));
             link.addEventListener('mouseleave', () => cursorOutline.classList.remove('hover'));
         });
+
     }
 
     // --- 2. Typing Effect ---

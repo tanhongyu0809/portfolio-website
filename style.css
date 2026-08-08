@@ -1308,6 +1308,29 @@ section {
     font-size: 0.95rem;
     font-weight: 500;
     transition: var(--transition);
+    position: relative;
+}
+
+/* Geek Code Tooltips */
+.skill-tags span::after {
+    content: attr(data-code);
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: rgba(15, 23, 42, 0.95);
+    border: 1px solid var(--accent-1);
+    color: var(--accent-1);
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-family: var(--font-pixel);
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    z-index: 20;
 }
 
 .skill-tags span:hover {
@@ -1315,6 +1338,11 @@ section {
     color: var(--accent-1);
     box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
     transform: translateY(-3px);
+}
+
+.skill-tags span:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
 }
 
 /* Contact */
