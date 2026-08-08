@@ -40,12 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Only run custom cursor logic if not on a touch device
     if(window.matchMedia("(pointer: fine)").matches) {
-        
-        // Setup parallax elements
-        const stars1 = document.getElementById('stars');
-        const stars2 = document.getElementById('stars2');
-        const stars3 = document.getElementById('stars3');
-
         window.addEventListener('mousemove', (e) => {
             const posX = e.clientX;
             const posY = e.clientY;
@@ -58,18 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 left: `${posX}px`,
                 top: `${posY}px`
             }, { duration: 500, fill: "forwards" });
-
-            // Starfield Parallax Effect
-            const windowCenterX = window.innerWidth / 2;
-            const windowCenterY = window.innerHeight / 2;
-            const moveX = (posX - windowCenterX) * 0.05;
-            const moveY = (posY - windowCenterY) * 0.05;
-
-            if(stars1 && stars2 && stars3) {
-                stars1.style.transform = `translate(${moveX * 0.2}px, ${moveY * 0.2}px)`;
-                stars2.style.transform = `translate(${moveX * 0.4}px, ${moveY * 0.4}px)`;
-                stars3.style.transform = `translate(${moveX * 0.8}px, ${moveY * 0.8}px)`;
-            }
         });
 
         // Hover & Magnetic effect on interactable elements
